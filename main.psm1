@@ -1,4 +1,4 @@
-﻿<# if you think i know how this works, you're insane #>
+<# if you think i know how this works, you're insane #>
 
 class Attribute{
     [string]$Key
@@ -207,7 +207,7 @@ function New-PsXml {
         }
 
         #text/content stuff
-        if($t[$i] -match '[\w\s]')
+        elseif($t[$i] -match '[\w\s]')
         {
             [Element]$element = [Element]::new()
             $element.Type = "content"
@@ -233,6 +233,11 @@ function New-PsXml {
             {
                 #do nothing, don't add it to the thing.
             }
+        }
+
+        else
+        {
+            Write-Error "Expected element or content. Bad formatting or empty doc."
         }
     }
 
